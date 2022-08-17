@@ -16,9 +16,10 @@ jobs:
         with:
           name: code
           path: .
-  Performance-test:
+  Test:
     runs-on: ubuntu-latest
     container: golang:alpine
+    needs: Clone-down
     steps:
     - name: Download Clone-down
       uses: actions/download-artifact@v2
