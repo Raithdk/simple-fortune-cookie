@@ -28,4 +28,4 @@ jobs:
         path: .
     - name: Execute test
       working-directory: /frontend
-      run: go test
+      run: sudo snap install go --classic && go test
