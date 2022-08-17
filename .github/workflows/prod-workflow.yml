@@ -7,25 +7,25 @@ on: push
 jobs:
   Clone-down:
     runs-on: ubuntu-latest
-    container: golang:alpine
+    container: golang:bullseye
     steps:
       - name: Clone
         uses: actions/checkout@v2
-      - name: Upload build artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: code
           path: .
   Test:
     runs-on: ubuntu-latest
-    container: golang:alpine
+    container: golang:bullseye
     needs: Clone-down
     steps:
-    - name: Download Clone-down
+    - name: Download artifact
       uses: actions/download-artifact@v2
       with:
         name: code
         path: .
     - name: Execute test
       working-directory: ./frontend
-      run: sudo snap install go --classic && go test
+      run: go test
