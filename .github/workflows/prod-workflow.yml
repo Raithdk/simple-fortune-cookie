@@ -28,4 +28,3 @@ jobs:
         path: .
     - name: Execute performance test
       run: ls
-      run: go test
