@@ -26,4 +26,5 @@ jobs:
         name: code
         path: .
     - name: Execute performance test
+      working-directory: ./frontend
       run: go test
