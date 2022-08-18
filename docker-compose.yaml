@@ -3,7 +3,7 @@ services:
 
   frontend:
     container_name: frontend
-    build: frontend/
+    image: fortune-cookie-frontend:latest
     environment:
       - BACKEND_DNS=backend
     restart: always
@@ -12,7 +12,8 @@ services:
 
   backend:
     container_name: backend
-    build: backend/
+    image: fortune-cookie-backend:latest
+
     depends_on:
       - database
     environment:
@@ -25,4 +26,3 @@ services:
     command: ["redis-server", "--save", "5", "1", "--loglevel", "warning"]
     volumes:
       - /fortune-cookie-data:/data
-    restart: always

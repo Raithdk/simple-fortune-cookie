@@ -1,9 +1,8 @@
-name: JAVA CI
-on: push
-#env:
-#  docker_username: ${{ secrets.DOCKER_USERNAME }}
-#  docker_password: ${{ secrets.DOCKER_PASSWORD }}
-#  git_commit: ${{ github.sha }}
+name: FEATURE CI
+on: 
+  push:
+    branches: 
+      - "feature/**"
 jobs:
   Clone-down:
     runs-on: ubuntu-latest

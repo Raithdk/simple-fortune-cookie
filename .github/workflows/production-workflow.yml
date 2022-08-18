@@ -1,0 +1,63 @@
+name: PRODUCTION CI
+on:
+  push:
+    branches:
+      - "main"
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  GIT_COMMIT: ${{ github.sha }}
+
+jobs:
+  Clone-down:
+    runs-on: ubuntu-latest
+    container: golang:1.16
+    steps:
+      - name: Clone
+        uses: actions/checkout@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+
+  Push-frontend-to-hub:
+    runs-on: Production
+    needs: [Clone-down]
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh fortune-cookie-frontend frontend
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh fortune-cookie-frontend
+
+  Push-backend-to-hub:
+    runs-on: Production
+    needs: [Clone-down]
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh fortune-cookie-backend backend
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh fortune-cookie-backend
+      
+  Docker-build-run:
+    runs-on: Production
+    needs: [Push-backend-to-hub , Push-frontend-to-hub]
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: setup
+        run: source ci/runapp.sh
