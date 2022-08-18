@@ -2,7 +2,7 @@ name: PRODUCTION CI
 on:
   push:
     branches:
-      - "main"
+      - "feature/container-registry"
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
@@ -52,7 +52,7 @@ jobs:
       
   Docker-build-run:
     runs-on: Production
-    needs: [Push-frontend-to-hub , Push-backend-to-hub]
+    needs: [Push-backend-to-hub , Push-frontend-to-hub]
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
