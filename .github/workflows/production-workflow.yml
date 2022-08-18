@@ -1,0 +1,11 @@
+name: PRODUCTION CI
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  Docker-build:
+    runs-on: Production
+    steps:
+      - name: setup
+        run: source runapp.sh
