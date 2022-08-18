@@ -2,7 +2,7 @@ name: STAGING CI
 on: pull_request
 jobs:
   Clone-down-upload:
-    runs-on: ubuntu:22.04
+    runs-on: ubuntu:latest
     container: golang:1.16
     steps:
       - name: Clone
