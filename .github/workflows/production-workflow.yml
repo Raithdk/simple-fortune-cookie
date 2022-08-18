@@ -54,10 +54,15 @@ jobs:
     runs-on: Production
     needs: [Push-backend-to-hub , Push-frontend-to-hub]
     steps:
+    
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
           name: code
           path: .
+      - name: create env file
+      run: |
+        touch .env
+        echo GIT_COMMIT=${{ github.sha }} >> .env
       - name: setup
         run: source ci/runapp.sh
