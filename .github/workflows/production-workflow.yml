@@ -2,7 +2,7 @@ name: PRODUCTION CI
 on:
   push:
     branches:
-      - "feature/container-registry"
+      - "main"
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
@@ -59,9 +59,5 @@ jobs:
         with:
           name: code
           path: .
-      - name: create env file
-        run: |
-          touch .env
-          echo GIT_COMMIT=${{ github.sha }} >> .env
       - name: setup
         run: source ci/runapp.sh
