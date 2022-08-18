@@ -27,7 +27,7 @@ jobs:
     needs: Docker-build-run
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: code
           path: . | !.git
@@ -38,7 +38,7 @@ jobs:
     needs: Functional-test
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: code
           path: . | !.git
