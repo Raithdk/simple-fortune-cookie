@@ -5,7 +5,7 @@ on:
       - "main"
 jobs:
   Clone-down-upload:
-    runs-on: ubuntu-latest
+    runs-on: Production
     container: golang:1.16
     steps:
       - name: Clone
