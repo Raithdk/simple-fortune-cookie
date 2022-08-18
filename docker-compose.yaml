@@ -3,7 +3,7 @@ services:
 
   frontend:
     container_name: frontend
-    image: fortune-cookie-frontend:${GIT_COMMIT::8}
+    image: fortune-cookie-frontend:latest
     environment:
       - BACKEND_DNS=backend
     restart: always
@@ -12,5 +12,5 @@ services:
 
   backend:
     container_name: backend
-    image: fortune-cookie-backend:${GIT_COMMIT::8}
+    image: fortune-cookie-backend:latest
     restart: always
