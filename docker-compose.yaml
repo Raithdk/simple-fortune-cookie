@@ -4,6 +4,8 @@ services:
   frontend:
     container_name: frontend
     build: frontend/
+    environment:
+      - BACKEND_DNS=backend
     restart: always
     ports:
       - "8080:8080"
