@@ -19,7 +19,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: code
-          path: .
+          path: . | !.git
       - name: setup
         run: chmod +x ./runapp.sh && ./runapp.sh
   Functional-test:
