@@ -25,3 +25,4 @@ services:
     command: ["redis-server", "--save", "5", "1", "--loglevel", "warning"]
     volumes:
       - /fortune-cookie-data:/data
+    restart: always
