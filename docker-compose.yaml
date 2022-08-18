@@ -12,8 +12,3 @@ services:
     container_name: backend
     build: backend/
     restart: always
-    ports:
-      - "9000:9000"
-    
-
-    
