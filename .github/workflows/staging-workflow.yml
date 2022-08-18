@@ -41,6 +41,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: code
-          path: .
+          path: . | !.git
       - name: setup
-        run: chmod +x ./runapp.sh && ./downapp.sh
+        run: chmod +x ./downapp.sh && ./downapp.sh
