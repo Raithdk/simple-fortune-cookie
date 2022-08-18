@@ -4,19 +4,23 @@ on:
     branches:
       - "feature/**"
 jobs:
+  Clone:
+    runs-on: Production
+    steps:
+      - name: 
   Docker-build-run:
-    runs-on: Development
+    runs-on: Production
     steps:
       - name: setup
         run: source ci/runapp.sh
   Functional-test:
-    runs-on: Development
+    runs-on: Production
     needs: Docker-build-run
     steps:
       - name: Test
         run: echo "test"
   Docker-down:
-    runs-on: Development
+    runs-on: Production
     needs: Functional-test
     steps:
       - name: setup
