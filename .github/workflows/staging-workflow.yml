@@ -1,4 +1,4 @@
-name: DEVELOPMENT CI
+name: STAGING CI
 on: pull_request
 jobs:
   Clone-down-upload:
