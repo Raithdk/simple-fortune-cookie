@@ -17,6 +17,7 @@ jobs:
           path: .
   Docker-build-run:
     runs-on: Production
+    needs: Clone-down-upload
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
