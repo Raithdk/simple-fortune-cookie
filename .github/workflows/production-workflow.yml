@@ -48,7 +48,7 @@ jobs:
       - name: push docker
         run: chmod +x ci/push-docker.sh && ci/push-docker.sh fortune-cookie-backend
 
- Docker-build-run:
+  Docker-build-run:
     runs-on: Production
     needs: [Push-backend-to-hub , Push-frontend-to-hub]
     steps:
