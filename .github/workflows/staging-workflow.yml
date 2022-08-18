@@ -22,6 +22,8 @@ jobs:
         with:
           name: code
           path: .
+      - name: test
+        run: ls
       - name: setup
         run: ./ci/runapp.sh
   Functional-test:
