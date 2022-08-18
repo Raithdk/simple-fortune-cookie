@@ -32,7 +32,7 @@ jobs:
           name: code
           path: . | !.git
       - name: Test
-        run: echo "test"
+        run: chmod +x ./functional-test/test.sh && ./functional-test/test.sh
   Docker-down:
     runs-on: Staging
     needs: Functional-test
