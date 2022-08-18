@@ -3,7 +3,6 @@ on: pull_request
 jobs:
   Clone-down-upload:
     runs-on: Staging
-    container: scratch
     steps:
       - name: Clone
         uses: actions/checkout@v2
@@ -14,7 +13,6 @@ jobs:
           path: .
   Docker-build-run:
     runs-on: Staging
-    container: scratch
     needs: Clone-down-upload
     steps:
       - name: Download artifact
@@ -26,7 +24,6 @@ jobs:
         run: ./ci/runapp.sh
   Functional-test:
     runs-on: Staging
-    container: scratch
     needs: Docker-build-run
     steps:
       - name: Download artifact
@@ -38,7 +35,6 @@ jobs:
         run: echo "test"
   Docker-down:
     runs-on: Staging
-    container: scratch
     needs: Functional-test
     steps:
       - name: Download artifact
