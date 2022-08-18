@@ -22,10 +22,8 @@ jobs:
         with:
           name: code
           path: .
-      - name: test
-        run: ls
       - name: setup
-        run: ./ci/runapp.sh
+        run: ./runapp.sh
   Functional-test:
     runs-on: Staging
     needs: Docker-build-run
@@ -47,4 +45,4 @@ jobs:
           name: code
           path: .
       - name: setup
-        run: ./ci/downapp.sh
+        run: ./downapp.sh
