@@ -8,7 +8,7 @@ jobs:
     runs-on: Development
     steps:
       - name: setup
-        run: source runapp.sh
+        run: source ci/runapp.sh
   Functional-test:
     runs-on: Development
     needs: Docker-build-run
@@ -20,4 +20,4 @@ jobs:
     needs: Functional-test
     steps:
       - name: setup
-        run: source downapp.sh
+        run: source ci/downapp.sh
