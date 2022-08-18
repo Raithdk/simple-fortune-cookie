@@ -4,7 +4,7 @@ on:
     branches:
       - "main"
 jobs:
-  Docker-build:
+  Docker-build-run:
     runs-on: Production
     steps:
       - name: setup

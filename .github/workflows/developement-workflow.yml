@@ -1,0 +1,21 @@
+name: DEVELOPMENT CI
+on:
+  push:
+    branches:
+      - "feature/**"
+jobs:
+  Docker-build-run:
+    runs-on: Development
+    steps:
+      - name: setup
+        run: source runapp.sh
+  Functional-test:
+    needs: Docker-build-run
+    steps:
+      - name: Test
+        run: test
+  Docker-down:
+    runs-on: Development
+    steps:
+      - name: setup
+        run: source downapp.sh
