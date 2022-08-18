@@ -21,10 +21,10 @@ jobs:
     needs: Clone-down-upload
     steps:
     - name: Download artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v2
       with:
         name: code
-        path: . ! .git
+        path: .
     - name: Execute test
       working-directory: ./frontend
       run: go test
