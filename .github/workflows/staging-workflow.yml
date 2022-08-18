@@ -2,7 +2,7 @@ name: STAGING CI
 on: pull_request
 jobs:
   Clone-down-upload:
-    runs-on: Staging
+    runs-on: Production
     steps:
       - name: Clone
         uses: actions/checkout@v2
@@ -12,7 +12,7 @@ jobs:
           name: code
           path: .
   Docker-build-run:
-    runs-on: Staging
+    runs-on: Production
     needs: Clone-down-upload
     steps:
       - name: Download artifact
@@ -23,7 +23,7 @@ jobs:
       - name: setup
         run: chmod +x ./runapp.sh && ./runapp.sh
   Functional-test:
-    runs-on: Staging
+    runs-on: Production
     needs: Docker-build-run
     steps:
       - name: Download artifact
@@ -34,7 +34,7 @@ jobs:
       - name: Test
         run: echo "test"
   Docker-down:
-    runs-on: Staging
+    runs-on: Production
     needs: Functional-test
     steps:
       - name: Download artifact
