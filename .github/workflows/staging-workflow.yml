@@ -2,7 +2,8 @@ name: STAGING CI
 on: pull_request
 jobs:
   Clone-down-upload:
-    runs-on: Staging
+    runs-on: ubuntu-latest
+    container: golang:1.16
     steps:
       - name: Clone
         uses: actions/checkout@v2
@@ -12,8 +13,9 @@ jobs:
           name: code
           path: .
   Docker-build-run:
-    runs-on: Staging
+    runs-on: ubuntu-latest
     needs: Clone-down-upload
+    container: golang:1.16
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
