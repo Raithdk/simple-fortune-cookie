@@ -4,8 +4,25 @@ on:
     branches:
       - "main"
 jobs:
+  Push-frontend-to-hub:
+    runs-on: Production
+    steps:
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh fortune-cookie-frontend frontend
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh fortune-cookie-frontend
+
+  Push-backend-to-hub:
+    runs-on: Production
+    steps:
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh fortune-cookie-backend backend
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh fortune-cookie-backend
+      
   Docker-build-run:
     runs-on: Production
+    needs: [Push-frontend-to-hub , Push-backend-to-hub]
     steps:
       - name: setup
         run: source ci/runapp.sh
