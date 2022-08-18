@@ -5,7 +5,7 @@ on:
       - "feature/**"
 jobs:
   Clone-down-upload:
-    runs-on: Development
+    runs-on: ubuntu:22.04
     container: golang:1.16
     steps:
       - name: Clone
@@ -16,7 +16,7 @@ jobs:
           name: code
           path: .
   Test:
-    runs-on: Development
+    runs-on: ubuntu:22.04
     container: golang:1.16
     needs: Clone-down-upload
     steps:

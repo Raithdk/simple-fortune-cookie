@@ -6,7 +6,6 @@ on:
 jobs:
   Clone-down-upload:
     runs-on: Production
-    container: golang:1.16
     steps:
       - name: Clone
         uses: actions/checkout@v2
