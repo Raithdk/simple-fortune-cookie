@@ -27,11 +27,21 @@ jobs:
     runs-on: Staging
     needs: Docker-build-run
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
       - name: Test
         run: echo "test"
   Docker-down:
     runs-on: Staging
     needs: Functional-test
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
       - name: setup
         run: source ci/downapp.sh
