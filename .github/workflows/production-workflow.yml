@@ -8,4 +8,4 @@ jobs:
     runs-on: Production
     steps:
       - name: setup
-        run: source runapp.sh
+        run: source ./runapp.sh
