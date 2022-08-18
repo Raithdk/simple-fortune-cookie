@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  labels:
+    app: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+        - image: redis:7.0.4
+          name: database
+          command: ["redis-server", "--save", "5", "1", "--loglevel", "warning"]
+          ports:
+          - containerPort: 6379
