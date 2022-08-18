@@ -1,0 +1,31 @@
+name: JAVA CI
+on: push
+#env:
+#  docker_username: ${{ secrets.DOCKER_USERNAME }}
+#  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+#  git_commit: ${{ github.sha }}
+jobs:
+  Clone-down:
+    runs-on: ubuntu-latest
+    container: golang:1.16
+    steps:
+      - name: Clone
+        uses: actions/checkout@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+  Test:
+    runs-on: ubuntu-latest
+    container: golang:1.16
+    needs: Clone-down
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: code
+        path: .
+    - name: Execute test
+      working-directory: ./frontend
+      run: go test
