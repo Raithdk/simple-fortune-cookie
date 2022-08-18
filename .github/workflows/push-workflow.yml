@@ -4,7 +4,7 @@ on:
     branches: 
       - "feature/**"
 jobs:
-  Clone-down:
+  Clone-down-upload:
     runs-on: ubuntu-latest
     container: golang:1.16
     steps:
@@ -18,7 +18,7 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     container: golang:1.16
-    needs: Clone-down
+    needs: Clone-down-upload
     steps:
     - name: Download artifact
       uses: actions/download-artifact@v2

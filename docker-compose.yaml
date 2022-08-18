@@ -3,7 +3,7 @@ services:
 
   frontend:
     container_name: frontend
-    image: fortune-cookie-frontend:latest
+    image: janiksunke/fortune-cookie-frontend:latest
     environment:
       - BACKEND_DNS=backend
     restart: always
@@ -12,7 +12,7 @@ services:
 
   backend:
     container_name: backend
-    image: fortune-cookie-backend:latest
+    image: janiksunke/fortune-cookie-backend:latest
 
     depends_on:
       - database

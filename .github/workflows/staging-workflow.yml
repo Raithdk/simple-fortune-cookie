@@ -1,0 +1,46 @@
+name: STAGING CI
+on: pull_request
+jobs:
+  Clone-down-upload:
+    runs-on: Staging
+    steps:
+      - name: Clone
+        uses: actions/checkout@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+  Docker-build-run:
+    runs-on: Staging
+    needs: Clone-down-upload
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: code
+          path: . | !.git
+      - name: setup
+        run: chmod +x ./runapp.sh && ./runapp.sh
+  Functional-test:
+    runs-on: Staging
+    needs: Docker-build-run
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: code
+          path: . | !.git
+      - name: Test
+        run: echo "test"
+  Docker-down:
+    runs-on: Staging
+    needs: Functional-test
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: code
+          path: . | !.git
+      - name: setup
+        run: chmod +x ./downapp.sh && ./downapp.sh

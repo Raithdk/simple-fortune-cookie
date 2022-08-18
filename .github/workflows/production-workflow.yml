@@ -1,4 +1,4 @@
-name: PRODUCTION CI
+name: PRODUCTION CI 
 on:
   push:
     branches:
@@ -7,7 +7,6 @@ env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
   GIT_COMMIT: ${{ github.sha }}
-
 jobs:
   Clone-down:
     runs-on: ubuntu-latest
@@ -20,7 +19,6 @@ jobs:
         with:
           name: code
           path: .
-
   Push-frontend-to-hub:
     runs-on: Production
     needs: [Clone-down]
@@ -50,14 +48,15 @@ jobs:
       - name: push docker
         run: chmod +x ci/push-docker.sh && ci/push-docker.sh fortune-cookie-backend
       
-  Docker-build-run:
+     
+ Docker-build-run:
     runs-on: Production
     needs: [Push-backend-to-hub , Push-frontend-to-hub]
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: code
-          path: .
+          path: . | !.git
       - name: setup
-        run: source ci/runapp.sh
+        run: chmod +x ./runapp.sh && ./runapp.sh
