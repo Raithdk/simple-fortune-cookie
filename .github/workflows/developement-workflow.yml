@@ -1,22 +1,35 @@
 name: DEVELOPMENT CI
-on:
-  push:
-    branches:
-      - "feature/**"
+on: pull_request
 jobs:
-  Docker-build-run:
-    runs-on: Development
+  Clone-down-upload:
+    runs-on: ubuntu-latest
+    container: golang:1.16
     steps:
+      - name: Clone
+        uses: actions/checkout@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+  Docker-build-run:
+    runs-on: Staging
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
       - name: setup
         run: source ci/runapp.sh
   Functional-test:
-    runs-on: Development
+    runs-on: Staging
     needs: Docker-build-run
     steps:
       - name: Test
         run: echo "test"
   Docker-down:
-    runs-on: Development
+    runs-on: Staging
     needs: Functional-test
     steps:
       - name: setup
