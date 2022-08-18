@@ -2,7 +2,7 @@ name: PRODUCTION CI
 on:
   push:
     branches:
-      - "main"
+      - "feature/container-registry"
 jobs:
   Push-frontend-to-hub:
     runs-on: Production
