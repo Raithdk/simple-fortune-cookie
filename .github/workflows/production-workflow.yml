@@ -2,8 +2,7 @@ name: PRODUCTION CI
 on:
   push:
     branches:
-      - "feature/container-registry"
-      
+      - "main"
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
