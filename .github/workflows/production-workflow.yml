@@ -24,10 +24,10 @@ jobs:
     needs: [Clone-down]
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: code
-          path: .
+          path: . | !.git
       - name: build docker
         run: chmod +x ci/build-docker.sh && ci/build-docker.sh fortune-cookie-frontend frontend
       - name: push docker
@@ -38,10 +38,10 @@ jobs:
     needs: [Clone-down]
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: code
-          path: .
+          path: . | !.git
 
       - name: build docker
         run: chmod +x ci/build-docker.sh && ci/build-docker.sh fortune-cookie-backend backend
